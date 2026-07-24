@@ -1,0 +1,98 @@
+openapi: 3.1.0
+info:
+  title: Reson8 Speech-to-Text Auth API
+  version: v1
+  description: 'Reson8 provides infrastructure-grade automatic speech recognition (ASR): realtime WebSocket streaming, prerecorded file transcription, speaker diarization, turn detection, and text-based custom-model domain adaptation. This OpenAPI description was transcribed by API Evangelist from the published documentation at https://docs.reson8.dev/api/ — Reson8 does not publish its own OpenAPI file. WebSocket endpoints (realtime, turns) are described here as GET upgrade operations with the x-reson8-transport extension; consult the docs for the full message protocol.'
+  contact:
+    name: Reson8 (Resonate Labs B.V.)
+    url: https://www.reson8.dev/
+  termsOfService: https://www.reson8.dev/terms
+servers:
+- url: https://api.reson8.dev
+  description: Production
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- name: Auth
+  description: Exchange an API key for a short-lived access token.
+paths:
+  /v1/auth/token:
+    post:
+      operationId: requestToken
+      tags:
+      - Auth
+      summary: Request an access token
+      description: Exchange an API key for a short-lived OAuth2 Bearer access token for use in client-side applications.
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Access token issued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+              example:
+                access_token: <your_access_token>
+                token_type: Bearer
+                expires_in: 600
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  responses:
+    InternalError:
+      description: Unexpected server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: INTERNAL_ERROR
+    Unauthorized:
+      description: Missing or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: UNAUTHORIZED
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+          enum:
+          - INVALID_REQUEST
+          - UNAUTHORIZED
+          - NOT_FOUND
+          - PAYLOAD_TOO_LARGE
+          - INTERNAL_ERROR
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+          description: Always Bearer
+        expires_in:
+          type: number
+          description: Token lifetime in seconds
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Server-to-server. Value form: ApiKey <your_api_key>'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Short-lived access token from POST /v1/auth/token, for client-side use.
+x-generated: '2026-07-20'
+x-method: generated
+x-source: https://docs.reson8.dev/api/ (transcribed verbatim from published REST reference)
