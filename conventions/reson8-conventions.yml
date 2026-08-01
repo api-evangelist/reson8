@@ -1,0 +1,46 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.reson8.dev/
+authentication:
+  style: api-key + short-lived bearer token
+  header: Authorization
+  detail: authentication/reson8-authentication.yml
+versioning:
+  scheme: uri-path
+  current: v1
+  base_url: https://api.reson8.dev/v1
+idempotency:
+  supported: true
+  style: semantic
+  detail: >-
+    Phrase mutation is idempotent by value. POST /v1/custom-model/{id}/phrases returns
+    `added` vs `skipped` (phrases already present are skipped); POST .../phrases/delete
+    returns `deleted` vs `skipped` (phrases not present are skipped). Safe to retry.
+    Reson8 does not document a client-supplied Idempotency-Key header.
+pagination:
+  style: page-number
+  request_params: [page, size]
+  defaults: { page: 0, size: 100 }
+  bounds: { size_min: 1, size_max: 10000 }
+  response_fields: [phrases, page, size, total]
+  applies_to: [listPhrases]
+error_envelope:
+  field: code
+  format: json-object (not RFC 9457)
+  detail: errors/reson8-error-codes.yml
+streaming:
+  transport: websocket
+  endpoints:
+    - wss://api.reson8.dev/v1/speech-to-text/realtime
+    - wss://api.reson8.dev/v1/speech-to-text/turns
+  client_messages: [binary audio frames, 'flush_request (realtime)']
+  server_messages: [transcript, flush_confirmation, turn_start, turn_end_candidate, turn_end, turn_continuation]
+  browser_auth: Sec-WebSocket-Protocol header (bearer, <token>)
+content_types:
+  prerecorded_upload: application/octet-stream
+  json_bodies: application/json
+data_residency:
+  hosting: EU
+  audio_retention: none (zero audio retention)
+rate_limit_signaling:
+  documented: false

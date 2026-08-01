@@ -1,0 +1,17 @@
+generated: '2026-07-20'
+method: searched
+probe: true
+url: https://trust.reson8.dev/
+platform: Vanta Trust Center
+entity: Resonate Labs B.V.
+certifications: []
+notes: >-
+  Reson8 (Resonate Labs B.V.) operates a Vanta-hosted Trust Center at
+  https://trust.reson8.dev/. The page is a client-rendered Vanta SPA, so specific
+  named certifications (e.g. SOC 2 / ISO 27001) could not be read from the static
+  HTML and are left unlisted rather than assumed. The marketing site states
+  EU-hosted infrastructure with zero audio retention.
+evidence:
+  - source: https://trust.reson8.dev/
+    kind: vanta-trust-center
+    http_status: 200

@@ -1,0 +1,31 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.reson8.dev/api/ (per-endpoint Errors tables)
+envelope:
+  field: code
+  format: json-object
+  example: '{ "code": "UNAUTHORIZED" }'
+  notes: >-
+    Errors are returned as a JSON object with a machine-readable `code` and the
+    corresponding HTTP status. Not RFC 9457 problem+json.
+error_codes:
+  - code: INVALID_REQUEST
+    status: 400
+    meaning: Missing or invalid parameters (empty phrase list, blank phrase, per-model limit hit, invalid pagination).
+    operations: [transcribePrerecorded, streamRealtime, streamTurns, createCustomModel, listPhrases, addPhrases, deletePhrases]
+  - code: UNAUTHORIZED
+    status: 401
+    meaning: Missing, invalid, or expired API key / access token.
+    operations: [requestToken, transcribePrerecorded, streamRealtime, streamTurns, createCustomModel, listCustomModels, getCustomModel, listPhrases, addPhrases, deletePhrases]
+  - code: NOT_FOUND
+    status: 404
+    meaning: Custom model not found.
+    operations: [getCustomModel, listPhrases, addPhrases, deletePhrases]
+  - code: PAYLOAD_TOO_LARGE
+    status: 413
+    meaning: Audio file exceeds the maximum size.
+    operations: [transcribePrerecorded]
+  - code: INTERNAL_ERROR
+    status: 500
+    meaning: Unexpected server error.
+    operations: [requestToken, transcribePrerecorded, streamRealtime, streamTurns, createCustomModel, listCustomModels, getCustomModel, listPhrases, addPhrases, deletePhrases]

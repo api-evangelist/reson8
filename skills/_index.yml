@@ -1,0 +1,12 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/reson8-openapi.yml
+skills:
+  - file: reson8-transcribe-prerecorded.md
+    name: Transcribe a prerecorded audio file
+    api: openapi/reson8-openapi.yml
+    operations: [requestToken, transcribePrerecorded]
+  - file: reson8-manage-custom-model.md
+    name: Create and maintain a custom model
+    api: openapi/reson8-openapi.yml
+    operations: [createCustomModel, listCustomModels, getCustomModel, listPhrases, addPhrases, deletePhrases]

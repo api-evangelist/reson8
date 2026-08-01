@@ -1,0 +1,23 @@
+generated: '2026-07-20'
+method: searched
+notes: >-
+  Probed the standard /.well-known/ discovery surface on the API, docs, website,
+  and trust hosts. No machine-readable well-known documents were served (the
+  trust.reson8.dev/.well-known/security.txt path returns the Vanta SPA HTML shell,
+  not a real RFC 9116 security.txt). Recorded as valid "none" data.
+hosts:
+  - host: https://api.reson8.dev
+    documents:
+      - { path: /.well-known/security.txt, status: 404 }
+      - { path: /.well-known/openid-configuration, status: 404 }
+      - { path: /.well-known/oauth-authorization-server, status: 404 }
+      - { path: /.well-known/api-catalog, status: 404 }
+  - host: https://www.reson8.dev
+    documents:
+      - { path: /.well-known/security.txt, status: 404 }
+  - host: https://docs.reson8.dev
+    documents:
+      - { path: /.well-known/security.txt, status: 404 }
+  - host: https://trust.reson8.dev
+    documents:
+      - { path: /.well-known/security.txt, status: 200, note: 'Vanta SPA HTML, not a real security.txt' }

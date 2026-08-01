@@ -1,7 +1,28 @@
 aid: reson8
-name: reson8
-description: reson8 is a company surfaced as a portfolio company of balderton-capital and added to the
-  API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/reson8.png
+name: Reson8
+description: >-
+  Reson8 (Resonate Labs B.V.) is a Balderton Capital-backed speech-recognition company
+  offering an infrastructure-grade automatic speech recognition (ASR) API. Its
+  differentiator is text-based, hyper-custom domain adaptation: feed up to ~1M tokens of
+  domain vocabulary and a custom model adapts in under 60 seconds with no audio datasets
+  or fine-tuning, cutting word error rate versus generic engines. The v1 API at
+  api.reson8.dev provides realtime WebSocket streaming, turn-level events for
+  conversational voice agents, prerecorded file transcription, speaker diarization, and
+  custom-model phrase management across ten European languages, on EU-hosted
+  infrastructure with zero audio retention.
 url: https://raw.githubusercontent.com/api-evangelist/reson8/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,15 +32,135 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
-- Company
-apis: []
+- Speech Recognition
+- Speech-to-Text
+- ASR
+- Voice AI
+- Transcription
+- Diarization
+- Machine Learning
+- Developers
+apis:
+- aid: reson8:reson8-auth-api
+  name: Reson8 Auth API
+  description: Exchange an API key for a short-lived access token.
+  humanURL: https://docs.reson8.dev/
+  baseURL: https://api.reson8.dev/v1
+  tags:
+  - Auth
+  properties:
+  - type: OpenAPI
+    url: openapi/reson8-auth-api-openapi.yml
+  - type: APIReference
+    url: https://docs.reson8.dev/api/
+  - type: Documentation
+    url: https://docs.reson8.dev/
+  - type: GettingStarted
+    url: https://docs.reson8.dev/
+  - type: Authentication
+    url: authentication/reson8-authentication.yml
+- aid: reson8:reson8-custom-models-api
+  name: Reson8 Custom Models API
+  description: Domain adaptation via custom phrase models.
+  humanURL: https://docs.reson8.dev/
+  baseURL: https://api.reson8.dev/v1
+  tags:
+  - Custom Models
+  properties:
+  - type: OpenAPI
+    url: openapi/reson8-custom-models-api-openapi.yml
+  - type: APIReference
+    url: https://docs.reson8.dev/api/
+  - type: Documentation
+    url: https://docs.reson8.dev/
+  - type: GettingStarted
+    url: https://docs.reson8.dev/
+  - type: Authentication
+    url: authentication/reson8-authentication.yml
+- aid: reson8:reson8-speech-to-text-api
+  name: Reson8 Speech to Text API
+  description: Realtime, turn-level, and prerecorded transcription.
+  humanURL: https://docs.reson8.dev/
+  baseURL: https://api.reson8.dev/v1
+  tags:
+  - Speech to Text
+  properties:
+  - type: OpenAPI
+    url: openapi/reson8-speech-to-text-api-openapi.yml
+  - type: APIReference
+    url: https://docs.reson8.dev/api/
+  - type: Documentation
+    url: https://docs.reson8.dev/
+  - type: GettingStarted
+    url: https://docs.reson8.dev/
+  - type: Authentication
+    url: authentication/reson8-authentication.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/reson8-domain-security.yml
 - type: Website
   url: https://www.reson8.dev/
+- type: DeveloperPortal
+  url: https://console.reson8.dev/
+- type: Documentation
+  url: https://docs.reson8.dev/
+- type: APIReference
+  url: https://docs.reson8.dev/api/
+- type: GettingStarted
+  url: https://docs.reson8.dev/
+- type: Blog
+  url: https://www.reson8.dev/blog
+- type: GitHubOrganization
+  url: https://github.com/reson8labs
+- type: SignUp
+  url: https://console.reson8.dev/
+- type: Pricing
+  url: https://www.reson8.dev/#pricing
+- type: TermsOfService
+  url: https://www.reson8.dev/terms
+- type: PrivacyPolicy
+  url: https://www.reson8.dev/privacy-policy
+- type: StatusPage
+  url: https://status.reson8.dev
+- type: TrustCenter
+  url: https://trust.reson8.dev/
+- type: Authentication
+  url: authentication/reson8-authentication.yml
+- type: Conventions
+  url: conventions/reson8-conventions.yml
+- type: Idempotency
+  url: conventions/reson8-conventions.yml
+- type: ErrorCatalog
+  url: errors/reson8-error-codes.yml
+- type: Lifecycle
+  url: lifecycle/reson8-lifecycle.yml
+- type: Packages
+  url: packages/reson8-packages.yml
+- type: SDKs
+  url: packages/reson8-packages.yml
+- type: MCPServer
+  url: mcp/reson8-mcp.yml
+- type: LLMsTxt
+  url: llms/reson8-llms.txt
+- type: Overlay
+  url: overlays/reson8-openapi-overlay.yaml
+- type: Conformance
+  url: conformance/reson8-conformance.yml
+- type: DataModel
+  url: data-model/reson8-data-model.yml
+- type: WellKnown
+  url: well-known/reson8-well-known.yml
+- type: AgentSkill
+  url: skills/_index.yml
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 17
+  pass: local-v1

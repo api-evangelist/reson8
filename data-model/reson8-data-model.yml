@@ -1,0 +1,32 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/reson8-openapi.yml + https://docs.reson8.dev/api/
+entities:
+  - name: CustomModel
+    id_field: id
+    id_format: uuid
+    fields: [id, name, description, phraseCount]
+    description: A domain-adaptation model owned by an organization, holding a set of boosting phrases.
+  - name: Phrase
+    id_field: value
+    fields: [value]
+    description: A single boosting phrase belonging to a custom model.
+  - name: Transcript
+    fields: [text, language, is_final, start_ms, duration_ms, speaker_id, words, segments]
+    description: The recognition result, returned from prerecorded (segments when diarized) or streamed on the realtime/turns WebSocket.
+  - name: AccessToken
+    fields: [access_token, token_type, expires_in]
+    description: Short-lived Bearer token exchanged from an API key.
+relationships:
+  - from: CustomModel
+    to: Phrase
+    type: has_many
+    via: phrases
+  - from: Phrase
+    to: CustomModel
+    type: belongs_to
+    via: id (path)
+  - from: Transcript
+    to: CustomModel
+    type: belongs_to
+    via: custom_model_id (optional bias)

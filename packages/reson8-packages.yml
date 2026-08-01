@@ -1,0 +1,17 @@
+generated: '2026-07-20'
+method: searched
+source: https://pypi.org/project/livekit-plugins-reson8/
+notes: >-
+  Reson8 does not publish general-purpose server SDKs; the REST/WebSocket API is
+  called directly (see conventions/). The one first-party client library is the
+  Reson8 STT plugin for LiveKit Agents, published to PyPI from the reson8labs
+  GitHub org (Apache-2.0).
+packages:
+  - language: python
+    registry: pypi
+    name: livekit-plugins-reson8
+    url: https://pypi.org/project/livekit-plugins-reson8/
+    install: pip install livekit-plugins-reson8
+    source: https://github.com/reson8labs/livekit-plugins-reson8
+    official: true
+    description: Reson8 speech-to-text plugin for LiveKit Agents voice-AI applications.

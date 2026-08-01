@@ -1,0 +1,18 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Reson8 Speech-to-Text API
+  version: 1.0.0
+extends: openapi/reson8-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provenance: >-
+        OpenAPI transcribed by API Evangelist from the published docs at
+        https://docs.reson8.dev/api/ ; Reson8 publishes no OpenAPI of its own.
+      x-apievangelist-category: [Speech Recognition, Voice AI, Machine Learning]
+  - target: $.paths['/v1/custom-model/{id}/phrases'].post
+    update:
+      x-apievangelist-idempotent: true
+  - target: $.paths['/v1/custom-model/{id}/phrases/delete'].post
+    update:
+      x-apievangelist-idempotent: true

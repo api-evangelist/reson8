@@ -1,0 +1,33 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.reson8.dev/documentation/general/authentication/
+docs: https://docs.reson8.dev/documentation/general/authentication/
+summary:
+  types: [apiKey, http-bearer]
+  api_key_in: [header]
+  api_key_header: Authorization
+  api_key_scheme_prefix: ApiKey
+  oauth2_flows: []
+  token_exchange: true
+  token_ttl_seconds: 600
+schemes:
+  - name: ApiKey
+    type: apiKey
+    in: header
+    header: Authorization
+    value_format: 'ApiKey <api_key>'
+    scenario: Direct server-to-server connections. Keys are scoped to a client, created/managed in the console. Never expose client-side.
+    sources: [docs]
+  - name: Bearer
+    type: http
+    scheme: bearer
+    value_format: 'Bearer <access_token>'
+    scenario: End-user / client-side connections. Short-lived access token obtained by exchanging an API key at POST /v1/auth/token (token_type Bearer, expires_in ~600s).
+    token_endpoint: https://api.reson8.dev/v1/auth/token
+    sources: [docs]
+  - name: WebSocketSubProtocol
+    type: websocket-subprotocol
+    header: Sec-WebSocket-Protocol
+    value_format: 'bearer, <access_token>'
+    scenario: Browser WebSocket connections that cannot set custom headers pass the access token via the WebSocket sub-protocol.
+    sources: [docs]

@@ -1,0 +1,22 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/reson8-openapi.yml + https://docs.reson8.dev/
+standards:
+  - id: oauth2-bearer
+    conforms: partial
+    evidence: Short-lived Bearer access tokens issued via a token-exchange endpoint (POST /v1/auth/token); docs describe them as "OAuth2 access tokens" but no full OAuth2 authorization flow / scopes are published.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: 'Errors use a JSON code-envelope, not application/problem+json.'
+  - id: rfc8594-sunset-header
+    conforms: false
+    evidence: No deprecation/Sunset header policy documented.
+  - id: pagination
+    conforms: true
+    evidence: page/size request params with page/size/total response fields on listPhrases.
+  - id: idempotency
+    conforms: true
+    evidence: Phrase add/delete are idempotent by value (added/skipped, deleted/skipped).
+  - id: websocket-streaming
+    conforms: true
+    evidence: WSS realtime and turn-level transcription channels.

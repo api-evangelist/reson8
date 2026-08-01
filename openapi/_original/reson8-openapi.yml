@@ -1,0 +1,451 @@
+openapi: 3.1.0
+x-generated: '2026-07-20'
+x-method: generated
+x-source: https://docs.reson8.dev/api/ (transcribed verbatim from published REST reference)
+info:
+  title: Reson8 Speech-to-Text API
+  version: v1
+  description: >-
+    Reson8 provides infrastructure-grade automatic speech recognition (ASR): realtime
+    WebSocket streaming, prerecorded file transcription, speaker diarization, turn
+    detection, and text-based custom-model domain adaptation. This OpenAPI description
+    was transcribed by API Evangelist from the published documentation at
+    https://docs.reson8.dev/api/ — Reson8 does not publish its own OpenAPI file.
+    WebSocket endpoints (realtime, turns) are described here as GET upgrade operations
+    with the x-reson8-transport extension; consult the docs for the full message protocol.
+  contact:
+    name: Reson8 (Resonate Labs B.V.)
+    url: https://www.reson8.dev/
+  termsOfService: https://www.reson8.dev/terms
+servers:
+  - url: https://api.reson8.dev
+    description: Production
+tags:
+  - name: Auth
+    description: Exchange an API key for a short-lived access token.
+  - name: Speech to Text
+    description: Realtime, turn-level, and prerecorded transcription.
+  - name: Custom Models
+    description: Domain adaptation via custom phrase models.
+security:
+  - ApiKeyAuth: []
+  - BearerAuth: []
+paths:
+  /v1/auth/token:
+    post:
+      operationId: requestToken
+      tags: [Auth]
+      summary: Request an access token
+      description: Exchange an API key for a short-lived OAuth2 Bearer access token for use in client-side applications.
+      security:
+        - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Access token issued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+              example:
+                access_token: <your_access_token>
+                token_type: Bearer
+                expires_in: 600
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /v1/speech-to-text/prerecorded:
+    post:
+      operationId: transcribePrerecorded
+      tags: [Speech to Text]
+      summary: Transcribe a prerecorded audio file
+      description: Upload a complete audio file as a binary body and receive the full transcript in one response. Supports diarization, word timing, and pattern recovery via query parameters.
+      parameters:
+        - { name: encoding, in: query, schema: { type: string, default: auto }, description: 'auto, m4a, m4v, mp4, mov, 3gp, 3g2, pcm_s16le, mulaw, or alaw' }
+        - { name: sample_rate, in: query, schema: { type: number, default: 16000 }, description: Sample rate in Hz }
+        - { name: channels, in: query, schema: { type: number, default: 1 }, description: Number of audio channels }
+        - { name: language, in: query, schema: { type: string }, description: Language code or comma-separated candidate list (e.g. nl,en) }
+        - { name: custom_model_id, in: query, schema: { type: string }, description: ID of a custom model to bias transcription }
+        - { name: include_timestamps, in: query, schema: { type: boolean, default: false } }
+        - { name: include_words, in: query, schema: { type: boolean, default: false } }
+        - { name: include_language, in: query, schema: { type: boolean, default: false } }
+        - { name: include_confidence, in: query, schema: { type: boolean, default: false } }
+        - { name: diarize, in: query, schema: { type: boolean, default: false }, description: Split the response into per-speaker segments }
+        - { name: max_speakers, in: query, schema: { type: number, minimum: 1, maximum: 4 }, description: Maximum distinct speakers (only when diarize=true) }
+        - { name: patterns, in: query, schema: { type: string }, description: Comma-separated regex-style patterns for alphanumeric token recovery }
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema: { type: string, format: binary }
+      responses:
+        '200':
+          description: Transcript.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrerecordedResult'
+              example:
+                text: the patient presented with chest pain and shortness of breath
+        '400':
+          $ref: '#/components/responses/InvalidRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '413':
+          description: Audio file exceeds maximum size.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: PAYLOAD_TOO_LARGE }
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /v1/speech-to-text/realtime:
+    get:
+      operationId: streamRealtime
+      tags: [Speech to Text]
+      summary: Realtime streaming transcription (WebSocket)
+      description: >-
+        wss://api.reson8.dev/v1/speech-to-text/realtime — open a WebSocket, send binary
+        audio frames and JSON control messages (flush_request), and receive transcript /
+        flush_confirmation messages. Browser clients pass the token via the
+        Sec-WebSocket-Protocol header (bearer, <token>).
+      x-reson8-transport: websocket
+      parameters:
+        - { name: encoding, in: query, schema: { type: string, default: auto }, description: 'auto, pcm_s16le, mulaw, or alaw' }
+        - { name: sample_rate, in: query, schema: { type: number, default: 16000 } }
+        - { name: channels, in: query, schema: { type: number, default: 1 } }
+        - { name: language, in: query, schema: { type: string } }
+        - { name: custom_model_id, in: query, schema: { type: string } }
+        - { name: include_timestamps, in: query, schema: { type: boolean, default: false } }
+        - { name: include_words, in: query, schema: { type: boolean, default: false } }
+        - { name: include_language, in: query, schema: { type: boolean, default: false } }
+        - { name: include_confidence, in: query, schema: { type: boolean, default: false } }
+        - { name: include_interim, in: query, schema: { type: boolean, default: false }, description: Include interim (partial) results and the is_final flag }
+        - { name: diarize, in: query, schema: { type: boolean, default: false } }
+        - { name: max_speakers, in: query, schema: { type: number, minimum: 1, maximum: 4 } }
+        - { name: patterns, in: query, schema: { type: string } }
+      responses:
+        '101':
+          description: Switching Protocols — WebSocket connection established.
+        '400':
+          $ref: '#/components/responses/InvalidRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /v1/speech-to-text/turns:
+    get:
+      operationId: streamTurns
+      tags: [Speech to Text]
+      summary: Turn-level streaming transcription (WebSocket)
+      description: >-
+        wss://api.reson8.dev/v1/speech-to-text/turns — turn-level WebSocket emitting
+        turn_start, turn_end_candidate, turn_end, and turn_continuation events for
+        low-latency conversational voice agents.
+      x-reson8-transport: websocket
+      parameters:
+        - { name: encoding, in: query, schema: { type: string, default: auto }, description: 'auto, pcm_s16le, mulaw, or alaw' }
+        - { name: sample_rate, in: query, schema: { type: number, default: 16000 } }
+        - { name: channels, in: query, schema: { type: number, default: 1 } }
+        - { name: language, in: query, schema: { type: string } }
+        - { name: custom_model_id, in: query, schema: { type: string } }
+        - { name: include_timestamps, in: query, schema: { type: boolean, default: false } }
+        - { name: include_words, in: query, schema: { type: boolean, default: false } }
+        - { name: include_language, in: query, schema: { type: boolean, default: false } }
+        - { name: patterns, in: query, schema: { type: string } }
+      responses:
+        '101':
+          description: Switching Protocols — WebSocket connection established.
+        '400':
+          $ref: '#/components/responses/InvalidRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /v1/custom-model:
+    post:
+      operationId: createCustomModel
+      tags: [Custom Models]
+      summary: Create a custom model
+      description: Create a new custom model with an initial, non-empty set of phrases.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CustomModelCreate' }
+            example:
+              name: Cardiology
+              description: Cardiology-specific terminology
+              phrases: [myocardial infarction, atrial fibrillation, echocardiogram]
+      responses:
+        '201':
+          description: Custom model created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CustomModel' }
+              example:
+                id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                name: Cardiology
+                description: Cardiology-specific terminology
+                phraseCount: 3
+        '400':
+          $ref: '#/components/responses/InvalidRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    get:
+      operationId: listCustomModels
+      tags: [Custom Models]
+      summary: List custom models
+      description: List all custom models for the authenticated organization.
+      responses:
+        '200':
+          description: Array of custom models.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/CustomModel' }
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /v1/custom-model/{id}:
+    get:
+      operationId: getCustomModel
+      tags: [Custom Models]
+      summary: Get a custom model
+      description: Fetch a single custom model by ID.
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string }, description: ID of the custom model }
+      responses:
+        '200':
+          description: The custom model.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CustomModel' }
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /v1/custom-model/{id}/phrases:
+    get:
+      operationId: listPhrases
+      tags: [Custom Models]
+      summary: List phrases
+      description: List the phrases in a custom model. Results are paginated with page/size.
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+        - { name: page, in: query, schema: { type: number, default: 0 }, description: Zero-based page index }
+        - { name: size, in: query, schema: { type: number, default: 100, minimum: 1, maximum: 10000 }, description: Page size }
+      responses:
+        '200':
+          description: A page of phrases.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PhrasePage' }
+              example:
+                phrases:
+                  - { value: myocardial infarction }
+                  - { value: atrial fibrillation }
+                page: 0
+                size: 100
+                total: 2
+        '400':
+          $ref: '#/components/responses/InvalidRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    post:
+      operationId: addPhrases
+      tags: [Custom Models]
+      summary: Add phrases
+      description: 'Add phrases to a custom model. Idempotent: phrases already present are left unchanged and reported as skipped.'
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PhraseList' }
+            example: { phrases: [pericarditis, atrial fibrillation] }
+      responses:
+        '200':
+          description: Result of the add operation.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AddPhrasesResult' }
+              example: { added: 1, skipped: 1 }
+        '400':
+          $ref: '#/components/responses/InvalidRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /v1/custom-model/{id}/phrases/delete:
+    post:
+      operationId: deletePhrases
+      tags: [Custom Models]
+      summary: Delete phrases
+      description: 'Remove phrases from a custom model by value. Idempotent: phrases not present are reported as skipped.'
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PhraseList' }
+            example: { phrases: [pericarditis, tachycardia] }
+      responses:
+        '200':
+          description: Result of the delete operation.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/DeletePhrasesResult' }
+              example: { deleted: 1, skipped: 1 }
+        '400':
+          $ref: '#/components/responses/InvalidRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Server-to-server. Value form: ApiKey <your_api_key>'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Short-lived access token from POST /v1/auth/token, for client-side use.
+  responses:
+    Unauthorized:
+      description: Missing or invalid credentials.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+          example: { code: UNAUTHORIZED }
+    InvalidRequest:
+      description: Missing or invalid parameters.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+          example: { code: INVALID_REQUEST }
+    NotFound:
+      description: Custom model not found.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+          example: { code: NOT_FOUND }
+    InternalError:
+      description: Unexpected server error.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+          example: { code: INTERNAL_ERROR }
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+          enum: [INVALID_REQUEST, UNAUTHORIZED, NOT_FOUND, PAYLOAD_TOO_LARGE, INTERNAL_ERROR]
+    TokenResponse:
+      type: object
+      properties:
+        access_token: { type: string }
+        token_type: { type: string, description: Always Bearer }
+        expires_in: { type: number, description: Token lifetime in seconds }
+    Word:
+      type: object
+      properties:
+        text: { type: string }
+        start_ms: { type: number }
+        duration_ms: { type: number }
+        confidence: { type: number, description: 'Probability in (0, 1]' }
+    Segment:
+      type: object
+      properties:
+        text: { type: string }
+        language: { type: string }
+        speaker_id: { type: number, description: Speaker label (integer, 0-indexed) }
+        start_ms: { type: number }
+        duration_ms: { type: number }
+        words:
+          type: array
+          items: { $ref: '#/components/schemas/Word' }
+    PrerecordedResult:
+      type: object
+      properties:
+        text: { type: string, description: Full transcript }
+        language: { type: string }
+        start_ms: { type: number }
+        duration_ms: { type: number }
+        words:
+          type: array
+          items: { $ref: '#/components/schemas/Word' }
+        segments:
+          type: array
+          description: Present when diarize=true
+          items: { $ref: '#/components/schemas/Segment' }
+    CustomModelCreate:
+      type: object
+      required: [name, description, phrases]
+      properties:
+        name: { type: string }
+        description: { type: string }
+        phrases:
+          type: array
+          items: { type: string }
+          minItems: 1
+    CustomModel:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        description: { type: string }
+        phraseCount: { type: number }
+    PhraseList:
+      type: object
+      required: [phrases]
+      properties:
+        phrases:
+          type: array
+          items: { type: string }
+          minItems: 1
+    Phrase:
+      type: object
+      properties:
+        value: { type: string }
+    PhrasePage:
+      type: object
+      properties:
+        phrases:
+          type: array
+          items: { $ref: '#/components/schemas/Phrase' }
+        page: { type: number }
+        size: { type: number }
+        total: { type: number }
+    AddPhrasesResult:
+      type: object
+      properties:
+        added: { type: number }
+        skipped: { type: number }
+    DeletePhrasesResult:
+      type: object
+      properties:
+        deleted: { type: number }
+        skipped: { type: number }

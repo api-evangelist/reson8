@@ -1,0 +1,16 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.reson8.dev/
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: https://docs.reson8.dev/api/
+deprecation:
+  policy_url: null
+  sunset_header: null
+  documented: false
+sla:
+  url: null
+  uptime_target: null
+status_page: https://status.reson8.dev
+deprecated_operations: []

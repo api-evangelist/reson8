@@ -1,0 +1,42 @@
+# Reson8 Documentation
+
+> Documentation for the Reson8 speech-to-text API: realtime WebSocket streaming, prerecorded transcription, speaker diarization, turn detection, and custom models.
+
+Each link below points to the raw Markdown source of a page. The complete documentation is available as a single file at https://docs.reson8.dev/llms-full.txt.
+
+## Getting Started
+- [Getting Started](https://docs.reson8.dev/_sources/index.md): Get started with the Reson8 speech-to-text API: create an account, generate API keys, and transcribe realtime or prerecorded audio in ten languages.
+
+## Documentation
+- [Documentation](https://docs.reson8.dev/_sources/documentation/index.md): Guides for the Reson8 speech-to-text platform: authentication, realtime and prerecorded transcription, diarization, turns, languages, patterns, and integrations.
+- [Authentication](https://docs.reson8.dev/_sources/documentation/general/authentication.md): How to authenticate Reson8 API requests with API keys, short-lived OAuth2 access tokens, and WebSocket sub-protocol headers.
+- [Glossary](https://docs.reson8.dev/_sources/documentation/general/glossary.md): Definitions of key Reson8 speech-to-text terms: access tokens, interim and final results, flush, phrase boosting, PCM audio, and more.
+- [Realtime](https://docs.reson8.dev/_sources/documentation/speech-to-text/realtime.md): Stream audio to the Reson8 realtime WebSocket API and receive live interim and final speech-to-text transcripts.
+- [Prerecorded](https://docs.reson8.dev/_sources/documentation/speech-to-text/prerecorded.md): Upload a complete audio file to the Reson8 REST API and receive the full speech-to-text transcript in one response.
+- [Diarization](https://docs.reson8.dev/_sources/documentation/speech-to-text/diarization.md): Enable speaker diarization to label Reson8 transcripts with speaker IDs — who spoke when — on realtime and prerecorded audio.
+- [Turns](https://docs.reson8.dev/_sources/documentation/speech-to-text/turns.md): Detect speaker turn starts and ends with the Reson8 turns WebSocket API — built for low-latency conversational voice agents.
+- [Languages](https://docs.reson8.dev/_sources/documentation/speech-to-text/languages.md): Languages supported by Reson8 speech-to-text and how per-utterance auto-detection works when no language is pinned.
+- [Patterns](https://docs.reson8.dev/_sources/documentation/speech-to-text/patterns.md): Recover structured alphanumeric tokens — order codes, reference numbers, licence plates — in Reson8 transcripts using pattern syntax.
+- [LiveKit Agents](https://docs.reson8.dev/_sources/documentation/integrations/livekit.md): Use Reson8 speech-to-text in LiveKit Agents voice AI applications with the livekit-plugins-reson8 Python package.
+
+## API Reference
+- [API Reference](https://docs.reson8.dev/_sources/api/index.md): Reference for all Reson8 API endpoints at api.reson8.dev: OAuth2 auth, realtime and prerecorded speech-to-text, turns, and custom models.
+- [POST Request Token](https://docs.reson8.dev/_sources/api/auth/token.md): POST /v1/auth/token — exchange a Reson8 API key for a short-lived OAuth2 access token. Request, response, and error codes.
+- [WSS Realtime](https://docs.reson8.dev/_sources/api/speech-to-text/realtime.md): WSS /v1/speech-to-text/realtime — realtime WebSocket transcription. Query parameters, message formats, and error codes.
+- [POST Prerecorded](https://docs.reson8.dev/_sources/api/speech-to-text/prerecorded.md): POST /v1/speech-to-text/prerecorded — transcribe a complete audio file. Headers, query parameters, response fields, and error codes.
+- [WSS Turns](https://docs.reson8.dev/_sources/api/speech-to-text/turns.md): WSS /v1/speech-to-text/turns — turn-level WebSocket endpoint emitting speaker turn events. Query parameters, messages, and error codes.
+- [POST Create](https://docs.reson8.dev/_sources/api/custom-model/create.md): POST /v1/custom-model — create a custom model with an initial set of phrases. Request, response, and error codes.
+- [GET List](https://docs.reson8.dev/_sources/api/custom-model/list.md): GET /v1/custom-model — list all custom models for the authenticated organization.
+- [GET Get](https://docs.reson8.dev/_sources/api/custom-model/get.md): GET /v1/custom-model/{id} — fetch a single custom model by ID.
+- [GET List Phrases](https://docs.reson8.dev/_sources/api/custom-model/phrases-list.md): GET /v1/custom-model/{id}/phrases — list the phrases in a custom model, with pagination.
+- [POST Add Phrases](https://docs.reson8.dev/_sources/api/custom-model/phrases-add.md): POST /v1/custom-model/{id}/phrases — add phrases to a custom model. Idempotent: existing phrases are reported as skipped.
+- [POST Delete Phrases](https://docs.reson8.dev/_sources/api/custom-model/phrases-delete.md): POST /v1/custom-model/{id}/phrases/delete — remove phrases from a custom model by value.
+
+## Support
+- [Support](https://docs.reson8.dev/_sources/support/index.md): Reson8 support: check real-time platform availability and incident updates on the service status page.
+
+## Company
+- [Reson8 website](https://www.reson8.dev): Product overview, benchmarks, and pricing
+- [Console](https://console.reson8.dev): Create an account and generate API keys
+- [Service status](https://status.reson8.dev): Real-time platform availability
+- [LiveKit plugin on PyPI](https://pypi.org/project/livekit-plugins-reson8/): Python package for LiveKit Agents
