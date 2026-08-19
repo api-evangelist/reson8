@@ -2,36 +2,40 @@ generated: '2026-07-20'
 method: derived
 status: candidate
 source: openapi/reson8-openapi.yml
-notes: >-
-  No official hosted/remote Reson8 MCP server was found. This is a candidate tool
-  list derived one-per-operation from the documented REST API, for a future MCP
-  wrapper. WebSocket streaming operations (realtime, turns) are not well suited to
-  MCP request/response tools and are omitted.
+notes: No official hosted/remote Reson8 MCP server was found. This is a candidate tool list derived one-per-operation
+  from the documented REST API, for a future MCP wrapper. WebSocket streaming operations (realtime, turns)
+  are not well suited to MCP request/response tools and are omitted.
 server:
   name: reson8
   transport: http
 tools:
-  - name: request_token
-    description: Exchange an API key for a short-lived Bearer access token.
-    source_operation: openapi/reson8-openapi.yml#requestToken
-  - name: transcribe_prerecorded
-    description: Transcribe a complete audio file and return the transcript.
-    source_operation: openapi/reson8-openapi.yml#transcribePrerecorded
-  - name: create_custom_model
-    description: Create a custom model with an initial set of phrases.
-    source_operation: openapi/reson8-openapi.yml#createCustomModel
-  - name: list_custom_models
-    description: List all custom models for the organization.
-    source_operation: openapi/reson8-openapi.yml#listCustomModels
-  - name: get_custom_model
-    description: Fetch a single custom model by ID.
-    source_operation: openapi/reson8-openapi.yml#getCustomModel
-  - name: list_phrases
-    description: List the phrases in a custom model (paginated).
-    source_operation: openapi/reson8-openapi.yml#listPhrases
-  - name: add_phrases
-    description: Add phrases to a custom model (idempotent).
-    source_operation: openapi/reson8-openapi.yml#addPhrases
-  - name: delete_phrases
-    description: Remove phrases from a custom model by value (idempotent).
-    source_operation: openapi/reson8-openapi.yml#deletePhrases
+- name: request_token
+  description: Exchange an API key for a short-lived Bearer access token.
+  source_operation: openapi/reson8-openapi.yml#requestToken
+- name: transcribe_prerecorded
+  description: Transcribe a complete audio file and return the transcript.
+  source_operation: openapi/reson8-openapi.yml#transcribePrerecorded
+- name: create_custom_model
+  description: Create a custom model with an initial set of phrases.
+  source_operation: openapi/reson8-openapi.yml#createCustomModel
+- name: list_custom_models
+  description: List all custom models for the organization.
+  source_operation: openapi/reson8-openapi.yml#listCustomModels
+- name: get_custom_model
+  description: Fetch a single custom model by ID.
+  source_operation: openapi/reson8-openapi.yml#getCustomModel
+- name: list_phrases
+  description: List the phrases in a custom model (paginated).
+  source_operation: openapi/reson8-openapi.yml#listPhrases
+- name: add_phrases
+  description: Add phrases to a custom model (idempotent).
+  source_operation: openapi/reson8-openapi.yml#addPhrases
+- name: delete_phrases
+  description: Remove phrases from a custom model by value (idempotent).
+  source_operation: openapi/reson8-openapi.yml#deletePhrases
+deployment:
+  mode: none
+  verified: derived
+  tools: 8
+  checked: '2026-08-12'
+  source: catalog MCP census

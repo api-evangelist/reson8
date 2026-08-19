@@ -1,0 +1,246 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Reson8 Speech-to-Text Auth Speech to Text API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Speech to Text",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Transcribe a prerecorded audio file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.reson8.dev/v1/speech-to-text/prerecorded",
+            "params": [
+              {
+                "name": "encoding",
+                "value": "",
+                "type": "query",
+                "description": "auto, m4a, m4v, mp4, mov, 3gp, 3g2, pcm_s16le, mulaw, or alaw"
+              },
+              {
+                "name": "sample_rate",
+                "value": "",
+                "type": "query",
+                "description": "Sample rate in Hz"
+              },
+              {
+                "name": "channels",
+                "value": "",
+                "type": "query",
+                "description": "Number of audio channels"
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query",
+                "description": "Language code or comma-separated candidate list (e.g. nl"
+              },
+              {
+                "name": "custom_model_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of a custom model to bias transcription"
+              },
+              {
+                "name": "include_timestamps",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_words",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_language",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_confidence",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "diarize",
+                "value": "",
+                "type": "query",
+                "description": "Split the response into per-speaker segments"
+              },
+              {
+                "name": "max_speakers",
+                "value": "",
+                "type": "query",
+                "description": "Maximum distinct speakers (only when diarize=true)"
+              },
+              {
+                "name": "patterns",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated regex-style patterns for alphanumeric token recovery"
+              }
+            ]
+          },
+          "docs": "Upload a complete audio file as a binary body and receive the full transcript in one response. Supports diarization, word timing, and pattern recovery via query parameters."
+        },
+        {
+          "info": {
+            "name": "Realtime streaming transcription (WebSocket)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reson8.dev/v1/speech-to-text/realtime",
+            "params": [
+              {
+                "name": "encoding",
+                "value": "",
+                "type": "query",
+                "description": "auto, pcm_s16le, mulaw, or alaw"
+              },
+              {
+                "name": "sample_rate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "channels",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "custom_model_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_timestamps",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_words",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_language",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_confidence",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_interim",
+                "value": "",
+                "type": "query",
+                "description": "Include interim (partial) results and the is_final flag"
+              },
+              {
+                "name": "diarize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "max_speakers",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patterns",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "wss://api.reson8.dev/v1/speech-to-text/realtime — open a WebSocket, send binary audio frames and JSON control messages (flush_request), and receive transcript / flush_confirmation messages. Browser clients pass the token via the Sec-WebSocket-Protocol header (bearer, <token>)."
+        },
+        {
+          "info": {
+            "name": "Turn-level streaming transcription (WebSocket)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reson8.dev/v1/speech-to-text/turns",
+            "params": [
+              {
+                "name": "encoding",
+                "value": "",
+                "type": "query",
+                "description": "auto, pcm_s16le, mulaw, or alaw"
+              },
+              {
+                "name": "sample_rate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "channels",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "custom_model_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_timestamps",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_words",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_language",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patterns",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "wss://api.reson8.dev/v1/speech-to-text/turns — turn-level WebSocket emitting turn_start, turn_end_candidate, turn_end, and turn_continuation events for low-latency conversational voice agents."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

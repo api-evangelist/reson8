@@ -1,0 +1,1549 @@
+{
+  "item": [
+    {
+      "id": "82c17b2c-41f0-4141-acd7-5fec64e3f951",
+      "name": "Speech to Text",
+      "description": {
+        "content": "Realtime, turn-level, and prerecorded transcription.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3496082b-b229-4929-af02-cdbb55727cea",
+          "name": "Transcribe a prerecorded audio file",
+          "request": {
+            "name": "Transcribe a prerecorded audio file",
+            "description": {
+              "content": "Upload a complete audio file as a binary body and receive the full transcript in one response. Supports diarization, word timing, and pattern recovery via query parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "speech-to-text",
+                "prerecorded"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "encoding",
+                  "value": "auto",
+                  "description": "auto, m4a, m4v, mp4, mov, 3gp, 3g2, pcm_s16le, mulaw, or alaw"
+                },
+                {
+                  "disabled": false,
+                  "key": "sample_rate",
+                  "value": "16000",
+                  "description": "Sample rate in Hz"
+                },
+                {
+                  "disabled": false,
+                  "key": "channels",
+                  "value": "1",
+                  "description": "Number of audio channels"
+                },
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>",
+                  "description": "Language code or comma-separated candidate list (e.g. nl"
+                },
+                {
+                  "disabled": false,
+                  "key": "custom_model_id",
+                  "value": "<string>",
+                  "description": "ID of a custom model to bias transcription"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_timestamps",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_words",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_language",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_confidence",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "diarize",
+                  "value": "false",
+                  "description": "Split the response into per-speaker segments"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_speakers",
+                  "value": "<number>",
+                  "description": "Maximum distinct speakers (only when diarize=true)"
+                },
+                {
+                  "disabled": false,
+                  "key": "patterns",
+                  "value": "<string>",
+                  "description": "Comma-separated regex-style patterns for alphanumeric token recovery"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/octet-stream"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<binary>"
+            }
+          },
+          "response": [
+            {
+              "id": "548f8dc8-a185-49ef-88ca-3634bc07930d",
+              "name": "Transcript.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "speech-to-text",
+                    "prerecorded"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "encoding",
+                      "value": "auto"
+                    },
+                    {
+                      "key": "sample_rate",
+                      "value": "16000"
+                    },
+                    {
+                      "key": "channels",
+                      "value": "1"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_model_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_timestamps",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_words",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_language",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_confidence",
+                      "value": "false"
+                    },
+                    {
+                      "key": "diarize",
+                      "value": "false"
+                    },
+                    {
+                      "key": "max_speakers",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "patterns",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"text\": \"the patient presented with chest pain and shortness of breath\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "260af8bf-d188-4fc7-a94b-7f7a33052158",
+              "name": "Missing or invalid parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "speech-to-text",
+                    "prerecorded"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "encoding",
+                      "value": "auto"
+                    },
+                    {
+                      "key": "sample_rate",
+                      "value": "16000"
+                    },
+                    {
+                      "key": "channels",
+                      "value": "1"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_model_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_timestamps",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_words",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_language",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_confidence",
+                      "value": "false"
+                    },
+                    {
+                      "key": "diarize",
+                      "value": "false"
+                    },
+                    {
+                      "key": "max_speakers",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "patterns",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ebc92e3-d187-47e5-aa2d-67401198e583",
+              "name": "Missing or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "speech-to-text",
+                    "prerecorded"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "encoding",
+                      "value": "auto"
+                    },
+                    {
+                      "key": "sample_rate",
+                      "value": "16000"
+                    },
+                    {
+                      "key": "channels",
+                      "value": "1"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_model_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_timestamps",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_words",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_language",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_confidence",
+                      "value": "false"
+                    },
+                    {
+                      "key": "diarize",
+                      "value": "false"
+                    },
+                    {
+                      "key": "max_speakers",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "patterns",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17430d75-d65c-4362-bafb-5bbfb0cf9aa7",
+              "name": "Audio file exceeds maximum size.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "speech-to-text",
+                    "prerecorded"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "encoding",
+                      "value": "auto"
+                    },
+                    {
+                      "key": "sample_rate",
+                      "value": "16000"
+                    },
+                    {
+                      "key": "channels",
+                      "value": "1"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_model_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_timestamps",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_words",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_language",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_confidence",
+                      "value": "false"
+                    },
+                    {
+                      "key": "diarize",
+                      "value": "false"
+                    },
+                    {
+                      "key": "max_speakers",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "patterns",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"PAYLOAD_TOO_LARGE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a0be49e-f771-439c-bad7-f0e9043876a9",
+              "name": "Unexpected server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "speech-to-text",
+                    "prerecorded"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "encoding",
+                      "value": "auto"
+                    },
+                    {
+                      "key": "sample_rate",
+                      "value": "16000"
+                    },
+                    {
+                      "key": "channels",
+                      "value": "1"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_model_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_timestamps",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_words",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_language",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_confidence",
+                      "value": "false"
+                    },
+                    {
+                      "key": "diarize",
+                      "value": "false"
+                    },
+                    {
+                      "key": "max_speakers",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "patterns",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INTERNAL_ERROR\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a712f4a7-95b9-4cbf-9b2a-603c9a5a028a",
+          "name": "Realtime streaming transcription (WebSocket)",
+          "request": {
+            "name": "Realtime streaming transcription (WebSocket)",
+            "description": {
+              "content": "wss://api.reson8.dev/v1/speech-to-text/realtime — open a WebSocket, send binary audio frames and JSON control messages (flush_request), and receive transcript / flush_confirmation messages. Browser clients pass the token via the Sec-WebSocket-Protocol header (bearer, <token>).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "speech-to-text",
+                "realtime"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "encoding",
+                  "value": "auto",
+                  "description": "auto, pcm_s16le, mulaw, or alaw"
+                },
+                {
+                  "disabled": false,
+                  "key": "sample_rate",
+                  "value": "16000"
+                },
+                {
+                  "disabled": false,
+                  "key": "channels",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "custom_model_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_timestamps",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_words",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_language",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_confidence",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_interim",
+                  "value": "false",
+                  "description": "Include interim (partial) results and the is_final flag"
+                },
+                {
+                  "disabled": false,
+                  "key": "diarize",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_speakers",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "patterns",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4292e3ec-4284-4585-b3b4-100a09465765",
+              "name": "Switching Protocols — WebSocket connection established.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "speech-to-text",
+                    "realtime"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "encoding",
+                      "value": "auto"
+                    },
+                    {
+                      "key": "sample_rate",
+                      "value": "16000"
+                    },
+                    {
+                      "key": "channels",
+                      "value": "1"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_model_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_timestamps",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_words",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_language",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_confidence",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_interim",
+                      "value": "false"
+                    },
+                    {
+                      "key": "diarize",
+                      "value": "false"
+                    },
+                    {
+                      "key": "max_speakers",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "patterns",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Switching Protocols",
+              "code": 101,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a1b6c462-d2a9-4695-9900-f9cc6d4e3b85",
+              "name": "Missing or invalid parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "speech-to-text",
+                    "realtime"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "encoding",
+                      "value": "auto"
+                    },
+                    {
+                      "key": "sample_rate",
+                      "value": "16000"
+                    },
+                    {
+                      "key": "channels",
+                      "value": "1"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_model_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_timestamps",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_words",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_language",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_confidence",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_interim",
+                      "value": "false"
+                    },
+                    {
+                      "key": "diarize",
+                      "value": "false"
+                    },
+                    {
+                      "key": "max_speakers",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "patterns",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88b2d6df-8d15-42ab-8bfc-ba544299ad83",
+              "name": "Missing or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "speech-to-text",
+                    "realtime"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "encoding",
+                      "value": "auto"
+                    },
+                    {
+                      "key": "sample_rate",
+                      "value": "16000"
+                    },
+                    {
+                      "key": "channels",
+                      "value": "1"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_model_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_timestamps",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_words",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_language",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_confidence",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_interim",
+                      "value": "false"
+                    },
+                    {
+                      "key": "diarize",
+                      "value": "false"
+                    },
+                    {
+                      "key": "max_speakers",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "patterns",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9dc42e9d-256f-45d4-897b-6df35b94f639",
+              "name": "Unexpected server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "speech-to-text",
+                    "realtime"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "encoding",
+                      "value": "auto"
+                    },
+                    {
+                      "key": "sample_rate",
+                      "value": "16000"
+                    },
+                    {
+                      "key": "channels",
+                      "value": "1"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_model_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_timestamps",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_words",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_language",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_confidence",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_interim",
+                      "value": "false"
+                    },
+                    {
+                      "key": "diarize",
+                      "value": "false"
+                    },
+                    {
+                      "key": "max_speakers",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "patterns",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INTERNAL_ERROR\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c87d5009-a32c-4145-803f-82721a990eb4",
+          "name": "Turn-level streaming transcription (WebSocket)",
+          "request": {
+            "name": "Turn-level streaming transcription (WebSocket)",
+            "description": {
+              "content": "wss://api.reson8.dev/v1/speech-to-text/turns — turn-level WebSocket emitting turn_start, turn_end_candidate, turn_end, and turn_continuation events for low-latency conversational voice agents.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "speech-to-text",
+                "turns"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "encoding",
+                  "value": "auto",
+                  "description": "auto, pcm_s16le, mulaw, or alaw"
+                },
+                {
+                  "disabled": false,
+                  "key": "sample_rate",
+                  "value": "16000"
+                },
+                {
+                  "disabled": false,
+                  "key": "channels",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "custom_model_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_timestamps",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_words",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_language",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "patterns",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "13891f12-8764-4109-9229-1ce98d7d023f",
+              "name": "Switching Protocols — WebSocket connection established.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "speech-to-text",
+                    "turns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "encoding",
+                      "value": "auto"
+                    },
+                    {
+                      "key": "sample_rate",
+                      "value": "16000"
+                    },
+                    {
+                      "key": "channels",
+                      "value": "1"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_model_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_timestamps",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_words",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_language",
+                      "value": "false"
+                    },
+                    {
+                      "key": "patterns",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Switching Protocols",
+              "code": 101,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c94c56e0-90ad-41df-8640-78eecf3e877a",
+              "name": "Missing or invalid parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "speech-to-text",
+                    "turns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "encoding",
+                      "value": "auto"
+                    },
+                    {
+                      "key": "sample_rate",
+                      "value": "16000"
+                    },
+                    {
+                      "key": "channels",
+                      "value": "1"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_model_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_timestamps",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_words",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_language",
+                      "value": "false"
+                    },
+                    {
+                      "key": "patterns",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_REQUEST\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7721e19-9033-42bf-a964-79d181061e0f",
+              "name": "Missing or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "speech-to-text",
+                    "turns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "encoding",
+                      "value": "auto"
+                    },
+                    {
+                      "key": "sample_rate",
+                      "value": "16000"
+                    },
+                    {
+                      "key": "channels",
+                      "value": "1"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_model_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_timestamps",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_words",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_language",
+                      "value": "false"
+                    },
+                    {
+                      "key": "patterns",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee736276-c34e-4988-a9d4-85a8dd1666e3",
+              "name": "Unexpected server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "speech-to-text",
+                    "turns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "encoding",
+                      "value": "auto"
+                    },
+                    {
+                      "key": "sample_rate",
+                      "value": "16000"
+                    },
+                    {
+                      "key": "channels",
+                      "value": "1"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_model_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_timestamps",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_words",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_language",
+                      "value": "false"
+                    },
+                    {
+                      "key": "patterns",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INTERNAL_ERROR\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.reson8.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d63d57eb-8ef6-4392-a089-908b9ceefae9",
+    "name": "Reson8 Speech-to-Text Auth Speech to Text API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Reson8 provides infrastructure-grade automatic speech recognition (ASR): realtime WebSocket streaming, prerecorded file transcription, speaker diarization, turn detection, and text-based custom-model domain adaptation. This OpenAPI description was transcribed by API Evangelist from the published documentation at https://docs.reson8.dev/api/ — Reson8 does not publish its own OpenAPI file. WebSocket endpoints (realtime, turns) are described here as GET upgrade operations with the x-reson8-transport extension; consult the docs for the full message protocol.\n\nContact Support:\n Name: Reson8 (Resonate Labs B.V.)",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Reson8 Speech-to-Text Auth Custom Models API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Custom Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List custom models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reson8.dev/v1/custom-model"
+          },
+          "docs": "List all custom models for the authenticated organization."
+        },
+        {
+          "info": {
+            "name": "Create a custom model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.reson8.dev/v1/custom-model",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new custom model with an initial, non-empty set of phrases."
+        },
+        {
+          "info": {
+            "name": "Get a custom model",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reson8.dev/v1/custom-model/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the custom model"
+              }
+            ]
+          },
+          "docs": "Fetch a single custom model by ID."
+        },
+        {
+          "info": {
+            "name": "List phrases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.reson8.dev/v1/custom-model/:id/phrases",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based page index"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Page size"
+              }
+            ]
+          },
+          "docs": "List the phrases in a custom model. Results are paginated with page/size."
+        },
+        {
+          "info": {
+            "name": "Add phrases",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.reson8.dev/v1/custom-model/:id/phrases",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add phrases to a custom model. Idempotent: phrases already present are left unchanged and reported as skipped."
+        },
+        {
+          "info": {
+            "name": "Delete phrases",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.reson8.dev/v1/custom-model/:id/phrases/delete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove phrases from a custom model by value. Idempotent: phrases not present are reported as skipped."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
