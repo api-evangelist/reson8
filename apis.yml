@@ -40,6 +40,15 @@ tags:
 - Voice AI
 - Transcription
 - Diarization
+- Machine-Learning
+- Developers
+tags_raw:
+- Speech Recognition
+- Speech-to-Text
+- ASR
+- Voice AI
+- Transcription
+- Diarization
 - Machine Learning
 - Developers
 apis:
@@ -49,6 +58,8 @@ apis:
   humanURL: https://docs.reson8.dev/
   baseURL: https://api.reson8.dev/v1
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
@@ -85,6 +96,8 @@ apis:
   humanURL: https://docs.reson8.dev/
   baseURL: https://api.reson8.dev/v1
   tags:
+  - Speech-to-Text
+  tags_raw:
   - Speech to Text
   properties:
   - type: OpenAPI
