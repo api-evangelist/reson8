@@ -13,6 +13,11 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "reson8-auth-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "reson8-custom-models-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "reson8-speech-to-text-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

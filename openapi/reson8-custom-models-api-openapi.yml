@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Reson8 Speech-to-Text Auth Custom Models API
   version: v1
@@ -232,91 +232,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
 components:
-  responses:
-    InternalError:
-      description: Unexpected server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: INTERNAL_ERROR
-    Unauthorized:
-      description: Missing or invalid credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: UNAUTHORIZED
-    InvalidRequest:
-      description: Missing or invalid parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: INVALID_REQUEST
-    NotFound:
-      description: Custom model not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: NOT_FOUND
   schemas:
-    CustomModel:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        phraseCount:
-          type: number
-    CustomModelCreate:
-      type: object
-      required:
-      - name
-      - description
-      - phrases
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        phrases:
-          type: array
-          items:
-            type: string
-          minItems: 1
-    Phrase:
-      type: object
-      properties:
-        value:
-          type: string
-    DeletePhrasesResult:
-      type: object
-      properties:
-        deleted:
-          type: number
-        skipped:
-          type: number
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code.
-          enum:
-          - INVALID_REQUEST
-          - UNAUTHORIZED
-          - NOT_FOUND
-          - PAYLOAD_TOO_LARGE
-          - INTERNAL_ERROR
     PhrasePage:
       type: object
       properties:
@@ -340,6 +256,18 @@ components:
           items:
             type: string
           minItems: 1
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+          enum:
+          - INVALID_REQUEST
+          - UNAUTHORIZED
+          - NOT_FOUND
+          - PAYLOAD_TOO_LARGE
+          - INTERNAL_ERROR
     AddPhrasesResult:
       type: object
       properties:
@@ -347,6 +275,78 @@ components:
           type: number
         skipped:
           type: number
+    CustomModelCreate:
+      type: object
+      required:
+      - name
+      - description
+      - phrases
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        phrases:
+          type: array
+          items:
+            type: string
+          minItems: 1
+    DeletePhrasesResult:
+      type: object
+      properties:
+        deleted:
+          type: number
+        skipped:
+          type: number
+    CustomModel:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        phraseCount:
+          type: number
+    Phrase:
+      type: object
+      properties:
+        value:
+          type: string
+  responses:
+    InvalidRequest:
+      description: Missing or invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: INVALID_REQUEST
+    InternalError:
+      description: Unexpected server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: INTERNAL_ERROR
+    Unauthorized:
+      description: Missing or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: UNAUTHORIZED
+    NotFound:
+      description: Custom model not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: NOT_FOUND
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
