@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Reson8 Speech-to-Text Auth Custom Models API
+  title: Reson8 Speech-to-Text Custom Models API
   version: v1
-  description: 'Reson8 provides infrastructure-grade automatic speech recognition (ASR): realtime WebSocket streaming, prerecorded file transcription, speaker diarization, turn detection, and text-based custom-model domain adaptation. This OpenAPI description was transcribed by API Evangelist from the published documentation at https://docs.reson8.dev/api/ — Reson8 does not publish its own OpenAPI file. WebSocket endpoints (realtime, turns) are described here as GET upgrade operations with the x-reson8-transport extension; consult the docs for the full message protocol.'
+  description: 'Reson8 provides infrastructure-grade automatic speech recognition (ASR): realtime WebSocket streaming, prerecorded file transcription, speaker diarization, turn detection, and text-based custom-model domain adaptation.'
   contact:
     name: Reson8 (Resonate Labs B.V.)
     url: https://www.reson8.dev/
@@ -233,6 +233,18 @@ paths:
           $ref: '#/components/responses/InternalError'
 components:
   schemas:
+    Phrase:
+      type: object
+      properties:
+        value:
+          type: string
+    AddPhrasesResult:
+      type: object
+      properties:
+        added:
+          type: number
+        skipped:
+          type: number
     PhrasePage:
       type: object
       properties:
@@ -246,32 +258,21 @@ components:
           type: number
         total:
           type: number
-    PhraseList:
-      type: object
-      required:
-      - phrases
-      properties:
-        phrases:
-          type: array
-          items:
-            type: string
-          minItems: 1
-    Error:
+    CustomModel:
       type: object
       properties:
-        code:
+        id:
           type: string
-          description: Machine-readable error code.
-          enum:
-          - INVALID_REQUEST
-          - UNAUTHORIZED
-          - NOT_FOUND
-          - PAYLOAD_TOO_LARGE
-          - INTERNAL_ERROR
-    AddPhrasesResult:
+        name:
+          type: string
+        description:
+          type: string
+        phraseCount:
+          type: number
+    DeletePhrasesResult:
       type: object
       properties:
-        added:
+        deleted:
           type: number
         skipped:
           type: number
@@ -291,54 +292,29 @@ components:
           items:
             type: string
           minItems: 1
-    DeletePhrasesResult:
+    Error:
       type: object
       properties:
-        deleted:
-          type: number
-        skipped:
-          type: number
-    CustomModel:
+        code:
+          type: string
+          description: Machine-readable error code.
+          enum:
+          - INVALID_REQUEST
+          - UNAUTHORIZED
+          - NOT_FOUND
+          - PAYLOAD_TOO_LARGE
+          - INTERNAL_ERROR
+    PhraseList:
       type: object
+      required:
+      - phrases
       properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        phraseCount:
-          type: number
-    Phrase:
-      type: object
-      properties:
-        value:
-          type: string
+        phrases:
+          type: array
+          items:
+            type: string
+          minItems: 1
   responses:
-    InvalidRequest:
-      description: Missing or invalid parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: INVALID_REQUEST
-    InternalError:
-      description: Unexpected server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: INTERNAL_ERROR
-    Unauthorized:
-      description: Missing or invalid credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: UNAUTHORIZED
     NotFound:
       description: Custom model not found.
       content:
@@ -347,6 +323,30 @@ components:
             $ref: '#/components/schemas/Error'
           example:
             code: NOT_FOUND
+    InternalError:
+      description: Unexpected server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: INTERNAL_ERROR
+    InvalidRequest:
+      description: Missing or invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: INVALID_REQUEST
+    Unauthorized:
+      description: Missing or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: UNAUTHORIZED
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

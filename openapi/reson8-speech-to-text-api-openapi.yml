@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Reson8 Speech-to-Text Auth Speech to Text API
+  title: Reson8 Speech-to-Text Speech to Text API
   version: v1
-  description: 'Reson8 provides infrastructure-grade automatic speech recognition (ASR): realtime WebSocket streaming, prerecorded file transcription, speaker diarization, turn detection, and text-based custom-model domain adaptation. This OpenAPI description was transcribed by API Evangelist from the published documentation at https://docs.reson8.dev/api/ — Reson8 does not publish its own OpenAPI file. WebSocket endpoints (realtime, turns) are described here as GET upgrade operations with the x-reson8-transport extension; consult the docs for the full message protocol.'
+  description: 'Reson8 provides infrastructure-grade automatic speech recognition (ASR): realtime WebSocket streaming, prerecorded file transcription, speaker diarization, turn detection, and text-based custom-model domain adaptation.'
   contact:
     name: Reson8 (Resonate Labs B.V.)
     url: https://www.reson8.dev/
@@ -14,14 +14,14 @@ security:
 - ApiKeyAuth: []
 - BearerAuth: []
 tags:
-- name: Speech to Text
+- name: Speech To Text
   description: Realtime, turn-level, and prerecorded transcription.
 paths:
   /v1/speech-to-text/prerecorded:
     post:
       operationId: transcribePrerecorded
       tags:
-      - Speech to Text
+      - Speech To Text
       summary: Transcribe a prerecorded audio file
       description: Upload a complete audio file as a binary body and receive the full transcript in one response. Supports diarization, word timing, and pattern recovery via query parameters.
       parameters:
@@ -126,9 +126,9 @@ paths:
     get:
       operationId: streamRealtime
       tags:
-      - Speech to Text
+      - Speech To Text
       summary: Realtime streaming transcription (WebSocket)
-      description: wss://api.reson8.dev/v1/speech-to-text/realtime — open a WebSocket, send binary audio frames and JSON control messages (flush_request), and receive transcript / flush_confirmation messages. Browser clients pass the token via the Sec-WebSocket-Protocol header (bearer, <token>).
+      description: wss://api.reson8.dev/v1/speech-to-text/realtime — open a WebSocket, send binary audio frames and JSON control messages (flush_request), and receive transcript / flush_confirmation messages. Browser clients pass the token via the Sec-WebSocket-Protocol header (bearer, ).
       x-reson8-transport: websocket
       parameters:
       - name: encoding
@@ -209,7 +209,7 @@ paths:
     get:
       operationId: streamTurns
       tags:
-      - Speech to Text
+      - Speech To Text
       summary: Turn-level streaming transcription (WebSocket)
       description: wss://api.reson8.dev/v1/speech-to-text/turns — turn-level WebSocket emitting turn_start, turn_end_candidate, turn_end, and turn_continuation events for low-latency conversational voice agents.
       x-reson8-transport: websocket
@@ -267,65 +267,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
 components:
-  responses:
-    InvalidRequest:
-      description: Missing or invalid parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: INVALID_REQUEST
-    InternalError:
-      description: Unexpected server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: INTERNAL_ERROR
-    Unauthorized:
-      description: Missing or invalid credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: UNAUTHORIZED
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code.
-          enum:
-          - INVALID_REQUEST
-          - UNAUTHORIZED
-          - NOT_FOUND
-          - PAYLOAD_TOO_LARGE
-          - INTERNAL_ERROR
-    PrerecordedResult:
-      type: object
-      properties:
-        text:
-          type: string
-          description: Full transcript
-        language:
-          type: string
-        start_ms:
-          type: number
-        duration_ms:
-          type: number
-        words:
-          type: array
-          items:
-            $ref: '#/components/schemas/Word'
-        segments:
-          type: array
-          description: Present when diarize=true
-          items:
-            $ref: '#/components/schemas/Segment'
     Segment:
       type: object
       properties:
@@ -357,6 +299,64 @@ components:
         confidence:
           type: number
           description: Probability in (0, 1]
+    PrerecordedResult:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Full transcript
+        language:
+          type: string
+        start_ms:
+          type: number
+        duration_ms:
+          type: number
+        words:
+          type: array
+          items:
+            $ref: '#/components/schemas/Word'
+        segments:
+          type: array
+          description: Present when diarize=true
+          items:
+            $ref: '#/components/schemas/Segment'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+          enum:
+          - INVALID_REQUEST
+          - UNAUTHORIZED
+          - NOT_FOUND
+          - PAYLOAD_TOO_LARGE
+          - INTERNAL_ERROR
+  responses:
+    InternalError:
+      description: Unexpected server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: INTERNAL_ERROR
+    InvalidRequest:
+      description: Missing or invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: INVALID_REQUEST
+    Unauthorized:
+      description: Missing or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: UNAUTHORIZED
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

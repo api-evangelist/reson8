@@ -1,9 +1,7 @@
 {
   "provider": "reson8",
   "sources": [
-    "reson8-auth-api-openapi.yml",
-    "reson8-custom-models-api-openapi.yml",
-    "reson8-speech-to-text-api-openapi.yml"
+    "_ae-authored/reson8-openapi.yml"
   ],
   "outputs": [
     "reson8-auth-api-openapi.yml",
@@ -14,10 +12,13 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "reson8-auth-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "reson8-custom-models-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "reson8-speech-to-text-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "reson8-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "reson8-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reson8-custom-models-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reson8-speech-to-text-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

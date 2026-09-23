@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Reson8 Speech-to-Text Auth API
   version: v1
-  description: 'Reson8 provides infrastructure-grade automatic speech recognition (ASR): realtime WebSocket streaming, prerecorded file transcription, speaker diarization, turn detection, and text-based custom-model domain adaptation. This OpenAPI description was transcribed by API Evangelist from the published documentation at https://docs.reson8.dev/api/ — Reson8 does not publish its own OpenAPI file. WebSocket endpoints (realtime, turns) are described here as GET upgrade operations with the x-reson8-transport extension; consult the docs for the full message protocol.'
+  description: 'Reson8 provides infrastructure-grade automatic speech recognition (ASR): realtime WebSocket streaming, prerecorded file transcription, speaker diarization, turn detection, and text-based custom-model domain adaptation.'
   contact:
     name: Reson8 (Resonate Labs B.V.)
     url: https://www.reson8.dev/
@@ -42,23 +42,6 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: UNAUTHORIZED
-    InternalError:
-      description: Unexpected server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: INTERNAL_ERROR
   schemas:
     TokenResponse:
       type: object
@@ -83,6 +66,23 @@ components:
           - NOT_FOUND
           - PAYLOAD_TOO_LARGE
           - INTERNAL_ERROR
+  responses:
+    InternalError:
+      description: Unexpected server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: INTERNAL_ERROR
+    Unauthorized:
+      description: Missing or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: UNAUTHORIZED
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
