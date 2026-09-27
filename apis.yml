@@ -53,7 +53,7 @@ tags:
 - Voice AI
 - Transcription
 - Diarization
-- Machine-Learning
+- Machine Learning
 - Developers
 tags_raw:
 - Speech Recognition
@@ -64,6 +64,7 @@ tags_raw:
 - Diarization
 - Machine Learning
 - Developers
+- Machine-Learning
 apis:
 - aid: reson8:reson8-auth-api
   name: Reson8 Auth API

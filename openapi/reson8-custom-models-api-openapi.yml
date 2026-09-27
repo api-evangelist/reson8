@@ -233,46 +233,22 @@ paths:
           $ref: '#/components/responses/InternalError'
 components:
   schemas:
-    Phrase:
+    Error:
       type: object
       properties:
-        value:
+        code:
           type: string
+          description: Machine-readable error code.
+          enum:
+          - INVALID_REQUEST
+          - UNAUTHORIZED
+          - NOT_FOUND
+          - PAYLOAD_TOO_LARGE
+          - INTERNAL_ERROR
     AddPhrasesResult:
       type: object
       properties:
         added:
-          type: number
-        skipped:
-          type: number
-    PhrasePage:
-      type: object
-      properties:
-        phrases:
-          type: array
-          items:
-            $ref: '#/components/schemas/Phrase'
-        page:
-          type: number
-        size:
-          type: number
-        total:
-          type: number
-    CustomModel:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        phraseCount:
-          type: number
-    DeletePhrasesResult:
-      type: object
-      properties:
-        deleted:
           type: number
         skipped:
           type: number
@@ -292,18 +268,42 @@ components:
           items:
             type: string
           minItems: 1
-    Error:
+    CustomModel:
       type: object
       properties:
-        code:
+        id:
           type: string
-          description: Machine-readable error code.
-          enum:
-          - INVALID_REQUEST
-          - UNAUTHORIZED
-          - NOT_FOUND
-          - PAYLOAD_TOO_LARGE
-          - INTERNAL_ERROR
+        name:
+          type: string
+        description:
+          type: string
+        phraseCount:
+          type: number
+    DeletePhrasesResult:
+      type: object
+      properties:
+        deleted:
+          type: number
+        skipped:
+          type: number
+    Phrase:
+      type: object
+      properties:
+        value:
+          type: string
+    PhrasePage:
+      type: object
+      properties:
+        phrases:
+          type: array
+          items:
+            $ref: '#/components/schemas/Phrase'
+        page:
+          type: number
+        size:
+          type: number
+        total:
+          type: number
     PhraseList:
       type: object
       required:

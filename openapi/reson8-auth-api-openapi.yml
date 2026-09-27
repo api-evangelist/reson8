@@ -43,17 +43,6 @@ paths:
           $ref: '#/components/responses/InternalError'
 components:
   schemas:
-    TokenResponse:
-      type: object
-      properties:
-        access_token:
-          type: string
-        token_type:
-          type: string
-          description: Always Bearer
-        expires_in:
-          type: number
-          description: Token lifetime in seconds
     Error:
       type: object
       properties:
@@ -66,15 +55,18 @@ components:
           - NOT_FOUND
           - PAYLOAD_TOO_LARGE
           - INTERNAL_ERROR
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+          description: Always Bearer
+        expires_in:
+          type: number
+          description: Token lifetime in seconds
   responses:
-    InternalError:
-      description: Unexpected server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: INTERNAL_ERROR
     Unauthorized:
       description: Missing or invalid credentials.
       content:
@@ -83,6 +75,14 @@ components:
             $ref: '#/components/schemas/Error'
           example:
             code: UNAUTHORIZED
+    InternalError:
+      description: Unexpected server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: INTERNAL_ERROR
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
