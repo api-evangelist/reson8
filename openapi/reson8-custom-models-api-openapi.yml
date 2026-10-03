@@ -232,89 +232,15 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
 components:
-  schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code.
-          enum:
-          - INVALID_REQUEST
-          - UNAUTHORIZED
-          - NOT_FOUND
-          - PAYLOAD_TOO_LARGE
-          - INTERNAL_ERROR
-    AddPhrasesResult:
-      type: object
-      properties:
-        added:
-          type: number
-        skipped:
-          type: number
-    CustomModelCreate:
-      type: object
-      required:
-      - name
-      - description
-      - phrases
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        phrases:
-          type: array
-          items:
-            type: string
-          minItems: 1
-    CustomModel:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        phraseCount:
-          type: number
-    DeletePhrasesResult:
-      type: object
-      properties:
-        deleted:
-          type: number
-        skipped:
-          type: number
-    Phrase:
-      type: object
-      properties:
-        value:
-          type: string
-    PhrasePage:
-      type: object
-      properties:
-        phrases:
-          type: array
-          items:
-            $ref: '#/components/schemas/Phrase'
-        page:
-          type: number
-        size:
-          type: number
-        total:
-          type: number
-    PhraseList:
-      type: object
-      required:
-      - phrases
-      properties:
-        phrases:
-          type: array
-          items:
-            type: string
-          minItems: 1
   responses:
+    Unauthorized:
+      description: Missing or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: UNAUTHORIZED
     NotFound:
       description: Custom model not found.
       content:
@@ -339,14 +265,88 @@ components:
             $ref: '#/components/schemas/Error'
           example:
             code: INVALID_REQUEST
-    Unauthorized:
-      description: Missing or invalid credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: UNAUTHORIZED
+  schemas:
+    Phrase:
+      type: object
+      properties:
+        value:
+          type: string
+    PhraseList:
+      type: object
+      required:
+      - phrases
+      properties:
+        phrases:
+          type: array
+          items:
+            type: string
+          minItems: 1
+    CustomModel:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        phraseCount:
+          type: number
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+          enum:
+          - INVALID_REQUEST
+          - UNAUTHORIZED
+          - NOT_FOUND
+          - PAYLOAD_TOO_LARGE
+          - INTERNAL_ERROR
+    CustomModelCreate:
+      type: object
+      required:
+      - name
+      - description
+      - phrases
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        phrases:
+          type: array
+          items:
+            type: string
+          minItems: 1
+    PhrasePage:
+      type: object
+      properties:
+        phrases:
+          type: array
+          items:
+            $ref: '#/components/schemas/Phrase'
+        page:
+          type: number
+        size:
+          type: number
+        total:
+          type: number
+    AddPhrasesResult:
+      type: object
+      properties:
+        added:
+          type: number
+        skipped:
+          type: number
+    DeletePhrasesResult:
+      type: object
+      properties:
+        deleted:
+          type: number
+        skipped:
+          type: number
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

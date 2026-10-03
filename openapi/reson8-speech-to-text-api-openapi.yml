@@ -267,19 +267,32 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: UNAUTHORIZED
+    InternalError:
+      description: Unexpected server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: INTERNAL_ERROR
+    InvalidRequest:
+      description: Missing or invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: INVALID_REQUEST
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code.
-          enum:
-          - INVALID_REQUEST
-          - UNAUTHORIZED
-          - NOT_FOUND
-          - PAYLOAD_TOO_LARGE
-          - INTERNAL_ERROR
     Segment:
       type: object
       properties:
@@ -299,18 +312,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Word'
-    Word:
-      type: object
-      properties:
-        text:
-          type: string
-        start_ms:
-          type: number
-        duration_ms:
-          type: number
-        confidence:
-          type: number
-          description: Probability in (0, 1]
     PrerecordedResult:
       type: object
       properties:
@@ -332,31 +333,30 @@ components:
           description: Present when diarize=true
           items:
             $ref: '#/components/schemas/Segment'
-  responses:
-    InvalidRequest:
-      description: Missing or invalid parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: INVALID_REQUEST
-    InternalError:
-      description: Unexpected server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: INTERNAL_ERROR
-    Unauthorized:
-      description: Missing or invalid credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: UNAUTHORIZED
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+          enum:
+          - INVALID_REQUEST
+          - UNAUTHORIZED
+          - NOT_FOUND
+          - PAYLOAD_TOO_LARGE
+          - INTERNAL_ERROR
+    Word:
+      type: object
+      properties:
+        text:
+          type: string
+        start_ms:
+          type: number
+        duration_ms:
+          type: number
+        confidence:
+          type: number
+          description: Probability in (0, 1]
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
