@@ -1,4 +1,4 @@
-# reson8
+# Reson8
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,6 +64,124 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-reson8 is a company surfaced as a portfolio company of balderton-capital and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+Reson8 (Resonate Labs B.V.) is a Balderton Capital-backed speech-recognition company offering an infrastructure-grade automatic speech recognition (ASR) API. Its differentiator is text-based, hyper-custom domain adaptation: feed up to ~1M tokens of domain vocabulary and a custom model adapts in under 60 seconds with no audio datasets or fine-tuning, cutting word error rate versus generic engines. The v1 API at api.reson8.dev provides realtime WebSocket streaming, turn-level events for conversational voice agents, prerecorded file transcription, speaker diarization, and custom-model phrase management across ten European languages, on EU-hosted infrastructure with zero audio retention.
 
-Backed by: balderton-capital — https://www.reson8.dev/
+**Areas:** Speech Recognition · Speech-to-Text · ASR · Voice AI · Transcription · Diarization · Machine Learning · Developers
+
+## Reson8 on APIs.io
+
+Everything profiled for Reson8 is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/reson8/](https://apis.io/providers/reson8/)** — or go straight to one of the APIs or properties below.
+
+### APIs (3)
+
+- [Reson8 Auth API](https://apis.io/apis/reson8/reson8-auth-api/) — Exchange an API key for a short-lived access token.
+- [Reson8 Custom Models API](https://apis.io/apis/reson8/reson8-custom-models-api/) — Domain adaptation via custom phrase models.
+- [Reson8 Speech to Text API](https://apis.io/apis/reson8/reson8-speech-to-text-api/) — Realtime, turn-level, and prerecorded transcription.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [reson8](https://apis.io/servers/reson8/reson8/)
+
+#### Collections (3)
+
+Postman and Open Collection request collections.
+
+- [Reson8 Speech-to-Text Auth API](https://apis.io/collections/reson8/open-reson8-auth-api/)
+- [Reson8 Speech-to-Text Auth Custom Models API](https://apis.io/collections/reson8/open-reson8-custom-models-api/)
+- [Reson8 Speech-to-Text Auth Speech to Text API](https://apis.io/collections/reson8/open-reson8-speech-to-text-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Reson8 Openapi Overlay](https://apis.io/overlays/reson8/reson8-openapi-overlay/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Reson8 Authentication](https://apis.io/security/reson8/reson8-authentication/)
+- [Reson8 Domain Security](https://apis.io/security/reson8/reson8-domain-security/)
+- [Reson8 Trust Center](https://apis.io/security/reson8/reson8-trust-center/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Reson8 Plans Pricing](https://apis.io/plans/reson8/reson8-plans-pricing/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.reson8.dev/)
+- [Documentation](https://docs.reson8.dev/)
+- [Getting started](https://docs.reson8.dev/)
+- [API reference](https://docs.reson8.dev/api/)
+- [Pricing](https://www.reson8.dev/#pricing)
+- [Sign up](https://console.reson8.dev/)
+- [Blog](https://www.reson8.dev/blog)
+- [Trust centre](https://trust.reson8.dev/)
+- [Terms of service](https://www.reson8.dev/terms)
+- [Privacy policy](https://www.reson8.dev/privacy-policy)
+- [GitHub](https://github.com/reson8labs)
+- [Status](https://status.reson8.dev)
+
+## API Evangelist rating
+
+**Kin Score 38.7** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 78.6 |
+| Contract quality | 14.6 |
+| Contract governance | 4.5 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 51.8 |
+| Access clarity | 65.8 |
+
+**Agent readiness 27.5** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | documented (partial credit) |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 27.3** — AI & Biometrics
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/reson8/](https://apis.io/providers/reson8/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Reson8: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/reson8/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
